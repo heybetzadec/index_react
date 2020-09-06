@@ -1,68 +1,66 @@
-import React, {useContext} from 'react';
-import { Menu, Switch } from 'antd';
-import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
-import DispatchContext from "../../../util/context/DispatchContext";
-import StateContext from "../../../util/context/StateContext";
+import React, {useState} from 'react';
+import {Link} from 'react-router-dom';
+import {Layout, Menu} from "antd";
+import {
+    CheckSquareOutlined,
+    FileImageOutlined,
+    FormOutlined,
+    HomeOutlined, SettingOutlined,
+    UnorderedListOutlined,
+    UserOutlined
+} from "@ant-design/icons";
 
-const { SubMenu } = Menu;
+const { Sider } = Layout;
 
 
 
-
-const LeftMenu = () => {
-
-    const appDispatch = useContext(DispatchContext)
-    const appState = useContext(StateContext)
-
-    const theme = 'dark'
-
-    function changeTheme() {
-        appDispatch({ type: "changeTheme" })
-    }
-
-    function handleClick(e) {
-        e.preventDefault()
-    }
+const LeftMenu = props => {
 
     return (
         <>
-            <Switch
-                checked={appState.theme === 'dark'}
-                onChange={changeTheme}
-                checkedChildren="Dark"
-                unCheckedChildren="Light"
-            />
-            <br />
-            <br />
-            <Menu
-                theme={theme}
-                onClick={handleClick}
-                style={{ width: 256 }}
-                defaultOpenKeys={['sub1']}
-                // selectedKeys={[this.state.current]}
-                mode="inline"
-            >
-                <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One">
-                    <Menu.Item key="1">Option 1</Menu.Item>
-                    <Menu.Item key="2">Option 2</Menu.Item>
-                    <Menu.Item key="3">Option 3</Menu.Item>
-                    <Menu.Item key="4">Option 4</Menu.Item>
-                </SubMenu>
-                <SubMenu key="sub2" icon={<AppstoreOutlined />} title="Navigation Two">
-                    <Menu.Item key="5">Option 5</Menu.Item>
-                    <Menu.Item key="6">Option 6</Menu.Item>
-                    <SubMenu key="sub3" title="Submenu">
-                        <Menu.Item key="7">Option 7</Menu.Item>
-                        <Menu.Item key="8">Option 8</Menu.Item>
-                    </SubMenu>
-                </SubMenu>
-                <SubMenu key="sub4" icon={<SettingOutlined />} title="Navigation Three">
-                    <Menu.Item key="9">Option 9</Menu.Item>
-                    <Menu.Item key="10">Option 10</Menu.Item>
-                    <Menu.Item key="11">Option 11</Menu.Item>
-                    <Menu.Item key="12">Option 12</Menu.Item>
-                </SubMenu>
-            </Menu>
+            <Sider trigger={null} collapsible collapsed={props.collapsed}>
+                <div className="logo" />
+                <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+                    <Menu.Item key="1" icon={<HomeOutlined />}>
+                        <Link to={global.final.dashboardPath}>
+                            Dashboard
+                        </Link>
+                    </Menu.Item>
+                    <Menu.Item key="2" icon={<UnorderedListOutlined />}>
+                        <Link to={global.final.dashboardPath + '/categories'}>
+                            Categories
+                        </Link>
+                    </Menu.Item>
+                    <Menu.Item key="3" icon={<FormOutlined />}>
+                        <Link to={global.final.dashboardPath + '/posts'}>
+                            Posts
+                        </Link>
+                    </Menu.Item>
+                    <Menu.Item key="4" icon={<FileImageOutlined />}>
+                        <Link to={global.final.dashboardPath + '/slider'}>
+                            Slider
+                        </Link>
+                    </Menu.Item>
+                    <Menu.Item key="5" icon={<UserOutlined />}>
+
+                        <Link to={global.final.dashboardPath + '/users'}>
+                            Users
+                        </Link>
+                    </Menu.Item>
+                    <Menu.Item key="6" icon={<CheckSquareOutlined />}>
+
+                        <Link to={global.final.dashboardPath + '/roles'}>
+                            Roles
+                        </Link>
+                    </Menu.Item>
+                    <Menu.Item key="7" icon={<SettingOutlined />}>
+
+                        <Link to={global.final.dashboardPath + '/setting'}>
+                            Setting
+                        </Link>
+                    </Menu.Item>
+                </Menu>
+            </Sider>
         </>
     )
 };

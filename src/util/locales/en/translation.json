@@ -1,3 +1,14 @@
 {
-  "dashboard": "Dashboard"
+  "dashboard": "Dashboard",
+  "categories": "Categories",
+  "add_category": "Add category",
+  "edit_category": "Edit category",
+  "posts": "Posts",
+  "add_post": "Add new post",
+  "edit_post": "Edit post",
+  "slider": "Slider",
+  "add_slider": "Add new slider",
+  "edit_slider": "Edit slider",
+  "roles": "Roles",
+  "settings": "Settings"
 }
