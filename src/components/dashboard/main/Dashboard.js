@@ -1,21 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import '../../../util/config/variable'
 import '../../../App.css'
-
-import {Layout} from 'antd';
 
 import DashboardPage from "../layout/DashboardPage";
 
 
 
 
-const { Content } = Layout;
-
 const Dashboard = (props) => {
 
-
     return (
-        <DashboardPage title={props.title}>
+        <DashboardPage title={props.title} menuKey={props.menuKey}>
             Dashboard
         </DashboardPage>
     )

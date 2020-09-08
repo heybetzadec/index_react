@@ -3,7 +3,7 @@ import DashboardPage from "../layout/DashboardPage";
 
 const SliderDetail = (props) => {
     return (
-        <DashboardPage title={props.title}>
+        <DashboardPage title={props.title} menuKey={props.menuKey}>
             SliderDetail
         </DashboardPage>
     )

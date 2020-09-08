@@ -4,7 +4,7 @@ import {Spin} from "antd";
 
 const DashboardLoading = (props) => {
     return (
-        <DashboardPage title={props.title}>
+        <DashboardPage title={props.title} menuKey={props.menuKey}>
             <Spin size="large" />
         </DashboardPage>
     )

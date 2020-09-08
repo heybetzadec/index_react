@@ -13,6 +13,7 @@ import translationTR from './util/locales/tr/translation.json';
 
 import StateContext from "./util/context/StateContext";
 import DispatchContext from "./util/context/DispatchContext";
+import LoadingPage from "./components/publicside/layout/LoadingPage";
 
 const HomePage = lazy(() => import('./components/publicside/layout/HomePage'));
 
@@ -84,11 +85,12 @@ function App() {
 
     const [state, dispatch] = useImmerReducer(ourReducer, initialState)
 
+
     return (
         <StateContext.Provider value={state}>
             <DispatchContext.Provider value={dispatch}>
                 <Router>
-                    <Suspense fallback={<div>Loading...</div>}>
+                    <Suspense fallback={<LoadingPage />}>
                         <Switch>
                             <Route exact path="/" component={HomePage}/>
                             <Route path={global.final.dashboardPath} exact>
@@ -142,7 +144,6 @@ function App() {
                             <Route path={global.final.dashboardPath+'/setting'}>
                                 <Setting title={t('setting')} menuKey={'7'}/>
                             </Route>
-
                             <Route path={global.final.dashboardPath + '/*'}>
                                 <DashboardLoading title={'...'}/>
                             </Route>

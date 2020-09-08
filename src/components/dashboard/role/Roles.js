@@ -3,7 +3,7 @@ import DashboardPage from "../layout/DashboardPage";
 
 const Roles = props => {
     return (
-        <DashboardPage title={props.title}>
+        <DashboardPage title={props.title} menuKey={props.menuKey}>
             Roles
         </DashboardPage>
     )

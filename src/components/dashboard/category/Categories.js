@@ -1,16 +1,19 @@
 import React from 'react';
-import { Table, Tag, Radio, Space } from 'antd';
+import {Table, Tag, Space, PageHeader, Button} from 'antd';
 import DashboardPage from "../layout/DashboardPage";
+import {Link} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 const Categories = (props) => {
-
+    const {t} = useTranslation();
 
     const columns = [
         {
             title: 'Name',
             dataIndex: 'name',
             key: 'name',
-            render: text => <a>{text}</a>,
+            // eslint-disable-next-line jsx-a11y/anchor-is-valid
+            render: text => text,
         },
         {
             title: 'Age',
@@ -47,8 +50,8 @@ const Categories = (props) => {
             key: 'action',
             render: (text, record) => (
                 <Space size="middle">
-                    <a>Edit</a>
-                    <a>Delete</a>
+                    <Link to={"#"}>Edit</Link>
+                    <Link to={"#"}>Delete</Link>
                 </Space>
             ),
         },
@@ -78,8 +81,23 @@ const Categories = (props) => {
         },
     ];
 
+    const breadcrumbItems = {items: [
+            {key: 1, name: t('dashboard'), link: global.final.dashboardPath},
+            {key: 2, name: t('categories')},
+        ]}
+
     return (
-        <DashboardPage title={props.title}>
+        <DashboardPage title={props.title} menuKey={props.menuKey}  breadcrumbItems={breadcrumbItems}>
+            <PageHeader
+                title={t('categories')}
+                extra={[
+                    <Button key="1" type="primary">
+                        <Link to={global.final.dashboardPath+'/category/add'}>
+                            {t('add_category')}
+                        </Link>
+                    </Button>,
+                ]}
+            />
             <Table
                 columns={columns}
                 pagination={{ position: [ 'bottomRight'] }}

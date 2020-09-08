@@ -1,17 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import '../../../util/config/variable'
 import '../../../App.css'
-import {Avatar, Button, Dropdown, Layout, Menu, Space, PageHeader, Descriptions} from 'antd';
+import {Avatar, Dropdown, Layout, Menu, Space} from 'antd';
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
     SearchOutlined,
 } from '@ant-design/icons';
 import LeftMenu from "./LeftMenu";
+import PageBreadcrumb from "./PageBreadcrumb";
 
 const { Header, Content } = Layout;
 
 const DashboardPage = (props) => {
+
+
     useEffect(() => {
         document.title = `${props.title} | ${global.final.appName}`
     }, [props.title])
@@ -47,7 +50,7 @@ const DashboardPage = (props) => {
     return (
         <>
             <Layout className="full-height">
-                <LeftMenu collapsed={collapsed}/>
+                <LeftMenu collapsed={collapsed} menuKey={props.menuKey}/>
                 <Layout className="site-layout">
                     <Header className="site-layout-background" style={{ padding: 0 }}>
                         {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
@@ -71,6 +74,8 @@ const DashboardPage = (props) => {
                             minHeight: 280,
                         }}
                     >
+
+                        <PageBreadcrumb breadcrumbItems={props.breadcrumbItems}/>
 
                         {props.children}
 

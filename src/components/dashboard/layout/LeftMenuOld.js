@@ -9,7 +9,7 @@ const { SubMenu } = Menu;
 
 
 
-const LeftMenu2 = () => {
+const LeftMenuOld = () => {
 
     const appDispatch = useContext(DispatchContext)
     const appState = useContext(StateContext)
@@ -67,4 +67,4 @@ const LeftMenu2 = () => {
     )
 };
 
-export default LeftMenu2;
+export default LeftMenuOld;

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
 import {Layout, Menu} from "antd";
 import {
@@ -16,11 +16,12 @@ const { Sider } = Layout;
 
 const LeftMenu = props => {
 
+
     return (
         <>
             <Sider trigger={null} collapsible collapsed={props.collapsed}>
                 <div className="logo" />
-                <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+                <Menu theme="dark" mode="inline" defaultSelectedKeys={[props.menuKey]}>
                     <Menu.Item key="1" icon={<HomeOutlined />}>
                         <Link to={global.final.dashboardPath}>
                             Dashboard

@@ -19,6 +19,14 @@ html, body {
     cursor: pointer;
 }
 
+.form_button_group{
+    margin-top: 50px;
+}
+
+.form_button_group .ant-space {
+    float: right;
+}
+
 #components-layout-demo-custom-trigger .trigger {
     font-size: 18px;
     line-height: 64px;
