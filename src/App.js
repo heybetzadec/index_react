@@ -17,6 +17,7 @@ import LoadingPage from "./components/publicside/layout/LoadingPage";
 
 const HomePage = lazy(() => import('./components/publicside/layout/HomePage'));
 
+const Login = lazy(() => import('./components/dashboard/login/Login'));
 const Dashboard = lazy(() => import( './components/dashboard/main/Dashboard'));
 const Categories = lazy(() => import('./components/dashboard/category/Categories'));
 const CategoryDetail = lazy(() => import('./components/dashboard/category/CategoryDetail'));

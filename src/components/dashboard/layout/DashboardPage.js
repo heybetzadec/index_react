@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import '../../../util/config/variable'
 import '../../../App.css'
-import {Avatar, Dropdown, Layout, Menu, Space} from 'antd';
+import {Avatar, Col, Dropdown, Layout, Menu, Row, Space} from 'antd';
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
@@ -9,10 +9,16 @@ import {
 } from '@ant-design/icons';
 import LeftMenu from "./LeftMenu";
 import PageBreadcrumb from "./PageBreadcrumb";
+import StateContext from "../../../util/context/StateContext";
+import DispatchContext from "../../../util/context/DispatchContext";
+import Login from "../login/Login";
 
 const { Header, Content } = Layout;
 
 const DashboardPage = (props) => {
+
+    const appState = useContext(StateContext)
+    const appDispatch = useContext(DispatchContext)
 
 
     useEffect(() => {
@@ -25,6 +31,12 @@ const DashboardPage = (props) => {
     const toggle = () => {
         setCollapsed(toogle => !toogle)
     };
+
+    if (!appState.loggedIn) {
+        return (
+            <Login/>
+        )
+    }
 
     const menu = (
         <Menu>
