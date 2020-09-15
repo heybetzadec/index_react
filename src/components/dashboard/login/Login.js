@@ -3,6 +3,8 @@ import StateContext from "../../../util/context/StateContext";
 import DispatchContext from "../../../util/context/DispatchContext";
 import {Button, Checkbox, Col, Form, Input, Row} from "antd";
 import {useTranslation} from "react-i18next";
+import LoginService from "../../../service/LoginService";
+import './../../../service/LoginService'
 
 const layout = {
     labelCol: { span: 7 },
@@ -18,6 +20,10 @@ const Login = props => {
     const {t} = useTranslation();
 
     const onFinish = values => {
+        const service  = new LoginService()
+        service.getLoginAuthentication("").then(data => {
+            console.log(data)
+        });
         console.log('Success:', values);
     };
 
