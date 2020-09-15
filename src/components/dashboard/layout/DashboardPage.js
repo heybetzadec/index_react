@@ -12,6 +12,7 @@ import PageBreadcrumb from "./PageBreadcrumb";
 import StateContext from "../../../util/context/StateContext";
 import DispatchContext from "../../../util/context/DispatchContext";
 import Login from "../login/Login";
+import UseWindowDimensions from "../../../util/helper/UseWindowDimensions";
 
 const { Header, Content } = Layout;
 
@@ -33,8 +34,26 @@ const DashboardPage = (props) => {
     };
 
     if (!appState.loggedIn) {
+        const { height, width } = UseWindowDimensions();
+        console.log(height + " -- " + width)
         return (
-            <Login/>
+                <div className="container-login100">
+                    <div className="wrap-login100">
+                        <h1 style={{textAlign:"center", paddingBottom:20}}>Login</h1>
+                        <Login/>
+                    </div>
+                </div>
+            // <Row style={{display:'unset'}} className="login-page">
+            //     <Col flex="1 1 300px"/>
+            //     <Col flex="1 1 300px">
+            //         {width>900 ? <Login/> : <></> }
+            //     </Col>
+            //     <Col flex="1 1 300px">
+            //         <div style={{display: 'block',  justifyContent:'center', alignItems:'center'}}>
+            //             {width<=900 ? <Login/> : <></> }
+            //         </div>
+            //     </Col>
+            // </Row>
         )
     }
 
@@ -61,7 +80,7 @@ const DashboardPage = (props) => {
 
     return (
         <>
-            <Layout className="full-height">
+            <Layout className="dashboard-container">
                 <LeftMenu collapsed={collapsed} menuKey={props.menuKey}/>
                 <Layout className="site-layout">
                     <Header className="site-layout-background" style={{ padding: 0 }}>

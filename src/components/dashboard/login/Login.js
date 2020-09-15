@@ -2,18 +2,20 @@ import React, {useContext} from 'react';
 import StateContext from "../../../util/context/StateContext";
 import DispatchContext from "../../../util/context/DispatchContext";
 import {Button, Checkbox, Col, Form, Input, Row} from "antd";
+import {useTranslation} from "react-i18next";
 
 const layout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
+    labelCol: { span: 7 },
+    wrapperCol: { span: 13 },
 };
 const tailLayout = {
-    wrapperCol: { offset: 8, span: 16 },
+    wrapperCol: { offset: 7, span: 13 },
 };
 
 const Login = props => {
     const appState = useContext(StateContext)
     const appDispatch = useContext(DispatchContext)
+    const {t} = useTranslation();
 
     const onFinish = values => {
         console.log('Success:', values);
@@ -24,51 +26,43 @@ const Login = props => {
     };
 
     return (
-        <>
-            <Row>
-                <Col style={{backgroundColor:"green"}} flex="1 1 300px">1</Col>
-                <Col style={{backgroundColor:"blue"}} flex="1 1 300px">
-                    <Form
-                        {...layout}
-                        style={{
-                            marginTop:"50%"
-                        }}
-                        name="basic"
-                        initialValues={{ remember: true }}
-                        onFinish={onFinish}
-                        onFinishFailed={onFinishFailed}
-                    >
-                        <Form.Item
-                            label="Username"
-                            name="username"
-                            rules={[{ required: true, message: 'Please input your username!' }]}
-                        >
-                            <Input />
-                        </Form.Item>
+        <Form
+            {...layout}
+            className="login-form"
+            name="basic"
+            initialValues={{ remember: true }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+        >
 
-                        <Form.Item
-                            label="Password"
-                            name="password"
-                            rules={[{ required: true, message: 'Please input your password!' }]}
-                        >
-                            <Input.Password />
-                        </Form.Item>
+            {/*<h2 style={{marginLeft:20, paddingTop:10}}>Error, login zamani sorun yandi</h2>*/}
 
-                        <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-                            <Checkbox>Remember me</Checkbox>
-                        </Form.Item>
+            <Form.Item
+                label={t('username')}
+                name="username"
+                rules={[{ required: true, message: t('input_username') }]}
+            >
+                <Input />
+            </Form.Item>
 
-                        <Form.Item {...tailLayout}>
-                            <Button type="primary" htmlType="submit">
-                                Submit
-                            </Button>
-                        </Form.Item>
-                    </Form>
-                </Col>
-                <Col style={{backgroundColor:"red"}} flex="1 1 300px">3</Col>
-            </Row>
+            <Form.Item
+                label={t('password')}
+                name="password"
+                rules={[{ required: true, message: t('input_password') }]}
+            >
+                <Input.Password />
+            </Form.Item>
 
-        </>
+            <Form.Item {...tailLayout} name="remember" valuePropName="checked">
+                <Checkbox>Remember me</Checkbox>
+            </Form.Item>
+
+            <Form.Item {...tailLayout}>
+                <Button type="primary" htmlType="submit">
+                    Submit
+                </Button>
+            </Form.Item>
+        </Form>
     )
 };
 

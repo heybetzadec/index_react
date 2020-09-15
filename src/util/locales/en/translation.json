@@ -10,5 +10,10 @@
   "add_slider": "Add new slider",
   "edit_slider": "Edit slider",
   "roles": "Roles",
-  "settings": "Settings"
+  "settings": "Settings",
+  "username": "Username",
+  "password": "Password",
+  "input_username": "Please input your username!",
+  "input_password": "Please input your password!",
+  "remember_me": "Remember me"
 }
