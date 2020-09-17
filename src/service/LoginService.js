@@ -3,7 +3,7 @@ const qs = require('querystring')
 
 export default class LoginService {
 
-    getLoginAuthentication(request){
+    getLoginAuthentication(requestBody){
         let axiosConfig = {
             headers: {
                 'Content-Type': "application/x-www-form-urlencoded",
@@ -13,7 +13,7 @@ export default class LoginService {
             email: "cavad@gmail.com",
             password: "password"
         };
-        return axios.post('http://127.0.0.1:8000/api/v1/user/login', qs.stringify(postData), axiosConfig).then(res => res.data);
+        return axios.post('http://127.0.0.1:8000/api/v1/user/login', qs.stringify(requestBody), axiosConfig).then(res => res.data);
     }
 
 }  

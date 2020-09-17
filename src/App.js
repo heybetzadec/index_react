@@ -18,6 +18,7 @@ import LoadingPage from "./components/publicside/layout/LoadingPage";
 const HomePage = lazy(() => import('./components/publicside/layout/HomePage'));
 
 const Dashboard = lazy(() => import( './components/dashboard/main/Dashboard'));
+const Login = lazy(() => import( './components/dashboard/login/Login'));
 const Categories = lazy(() => import('./components/dashboard/category/Categories'));
 const CategoryDetail = lazy(() => import('./components/dashboard/category/CategoryDetail'));
 const Posts = lazy(() => import( './components/dashboard/post/Posts'));
@@ -95,6 +96,9 @@ function App() {
                             <Route exact path="/" component={HomePage}/>
                             <Route path={global.final.dashboardPath} exact>
                                 <Dashboard title={t('dashboard')} menuKey={'1'}/>
+                            </Route>
+                            <Route path={'/login'} exact>
+                                <Login title={t('login')} menuKey={'1'}/>
                             </Route>
                             <Route path={global.final.dashboardPath+'/categories'}>
                                 <Categories title={t('categories')} menuKey={'2'}/>

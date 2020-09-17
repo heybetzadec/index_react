@@ -21,7 +21,7 @@ const Login = props => {
 
     const onFinish = values => {
         const service  = new LoginService()
-        service.getLoginAuthentication("").then(data => {
+        service.getLoginAuthentication(values).then(data => {
             console.log(data)
         });
         console.log('Success:', values);
@@ -32,43 +32,48 @@ const Login = props => {
     };
 
     return (
-        <Form
-            {...layout}
-            className="login-form"
-            name="basic"
-            initialValues={{ remember: true }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-        >
+        <div className="container-login100">
+            <div className="wrap-login100">
+                <h1 style={{textAlign:"center", paddingBottom:20}}>Login</h1>
+                <Form
+                    {...layout}
+                    className="login-form"
+                    name="basic"
+                    initialValues={{ remember: true }}
+                    onFinish={onFinish}
+                    onFinishFailed={onFinishFailed}
+                >
 
-            {/*<h2 style={{marginLeft:20, paddingTop:10}}>Error, login zamani sorun yandi</h2>*/}
+                    {/*<h2 style={{marginLeft:20, paddingTop:10}}>Error, login zamani sorun yandi</h2>*/}
 
-            <Form.Item
-                label={t('username')}
-                name="username"
-                rules={[{ required: true, message: t('input_username') }]}
-            >
-                <Input />
-            </Form.Item>
+                    <Form.Item
+                        label={t('username')}
+                        name="email"
+                        rules={[{ required: true, message: t('input_username') }]}
+                    >
+                        <Input />
+                    </Form.Item>
 
-            <Form.Item
-                label={t('password')}
-                name="password"
-                rules={[{ required: true, message: t('input_password') }]}
-            >
-                <Input.Password />
-            </Form.Item>
+                    <Form.Item
+                        label={t('password')}
+                        name="password"
+                        rules={[{ required: true, message: t('input_password') }]}
+                    >
+                        <Input.Password />
+                    </Form.Item>
 
-            <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-                <Checkbox>Remember me</Checkbox>
-            </Form.Item>
+                    <Form.Item {...tailLayout} name="remember" valuePropName="checked">
+                        <Checkbox>Remember me</Checkbox>
+                    </Form.Item>
 
-            <Form.Item {...tailLayout}>
-                <Button type="primary" htmlType="submit">
-                    Submit
-                </Button>
-            </Form.Item>
-        </Form>
+                    <Form.Item {...tailLayout}>
+                        <Button type="primary" htmlType="submit">
+                            Submit
+                        </Button>
+                    </Form.Item>
+                </Form>
+            </div>
+        </div>
     )
 };
 

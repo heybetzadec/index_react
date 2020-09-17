@@ -1,7 +1,8 @@
 import React, {useContext, useEffect, useState} from 'react';
+import { useHistory } from 'react-router-dom';
 import '../../../util/config/variable'
 import '../../../App.css'
-import {Avatar, Col, Dropdown, Layout, Menu, Row, Space} from 'antd';
+import {Avatar, Dropdown, Layout, Menu, Space} from 'antd';
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
@@ -11,8 +12,7 @@ import LeftMenu from "./LeftMenu";
 import PageBreadcrumb from "./PageBreadcrumb";
 import StateContext from "../../../util/context/StateContext";
 import DispatchContext from "../../../util/context/DispatchContext";
-import Login from "../login/Login";
-import UseWindowDimensions from "../../../util/helper/UseWindowDimensions";
+
 
 const { Header, Content } = Layout;
 
@@ -21,6 +21,7 @@ const DashboardPage = (props) => {
     const appState = useContext(StateContext)
     const appDispatch = useContext(DispatchContext)
 
+    const history = useHistory();
 
     useEffect(() => {
         document.title = `${props.title} | ${global.final.appName}`
@@ -34,27 +35,18 @@ const DashboardPage = (props) => {
     };
 
     if (!appState.loggedIn) {
-        const { height, width } = UseWindowDimensions();
-        console.log(height + " -- " + width)
-        return (
-                <div className="container-login100">
-                    <div className="wrap-login100">
-                        <h1 style={{textAlign:"center", paddingBottom:20}}>Login</h1>
-                        <Login/>
-                    </div>
-                </div>
-            // <Row style={{display:'unset'}} className="login-page">
-            //     <Col flex="1 1 300px"/>
-            //     <Col flex="1 1 300px">
-            //         {width>900 ? <Login/> : <></> }
-            //     </Col>
-            //     <Col flex="1 1 300px">
-            //         <div style={{display: 'block',  justifyContent:'center', alignItems:'center'}}>
-            //             {width<=900 ? <Login/> : <></> }
-            //         </div>
-            //     </Col>
-            // </Row>
-        )
+        history.push('login');
+
+
+        // const { height, width } = UseWindowDimensions();
+        // return (
+        //         <div className="container-login100">
+        //             <div className="wrap-login100">
+        //                 <h1 style={{textAlign:"center", paddingBottom:20}}>Login</h1>
+        //                 <Login/>
+        //             </div>
+        //         </div>
+        // )
     }
 
     const menu = (
