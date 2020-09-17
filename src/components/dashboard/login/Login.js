@@ -1,7 +1,7 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import StateContext from "../../../util/context/StateContext";
 import DispatchContext from "../../../util/context/DispatchContext";
-import {Button, Checkbox, Col, Form, Input, Row} from "antd";
+import {Alert, Button, Checkbox, Col, Form, Input, Row} from "antd";
 import {useTranslation} from "react-i18next";
 import LoginService from "../../../service/LoginService";
 import './../../../service/LoginService'
@@ -17,24 +17,45 @@ const tailLayout = {
 const Login = props => {
     const appState = useContext(StateContext)
     const appDispatch = useContext(DispatchContext)
+    const [warning, setWarning] = useState(false)
     const {t} = useTranslation();
 
     const onFinish = values => {
         const service  = new LoginService()
         service.getLoginAuthentication(values).then(data => {
             console.log(data)
+            if (data.status === 'ok'){
+                appDispatch({ type: "login", data: data })
+            } else {
+                setWarning(prevState => prevState=true)
+            }
         });
-        console.log('Success:', values);
     };
 
     const onFinishFailed = errorInfo => {
         console.log('Failed:', errorInfo);
     };
 
+    const getWarning = ()=>{
+        return (
+            <Alert
+                style={{marginBottom:20}}
+                message={t('not_match')}
+                type="warning"
+                closable
+            />
+        )
+    }
+
+    const onClose = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        console.log(e, 'I was closed.');
+    };
+
     return (
         <div className="container-login100">
             <div className="wrap-login100">
-                <h1 style={{textAlign:"center", paddingBottom:20}}>Login</h1>
+                <h1 style={{textAlign:"center", paddingBottom:10}}>Login</h1>
+                {warning ? getWarning() : <></>}
                 <Form
                     {...layout}
                     className="login-form"
@@ -44,12 +65,10 @@ const Login = props => {
                     onFinishFailed={onFinishFailed}
                 >
 
-                    {/*<h2 style={{marginLeft:20, paddingTop:10}}>Error, login zamani sorun yandi</h2>*/}
-
                     <Form.Item
-                        label={t('username')}
+                        label={t('mail')}
                         name="email"
-                        rules={[{ required: true, message: t('input_username') }]}
+                        rules={[{ required: true, message: t('input_email') }]}
                     >
                         <Input />
                     </Form.Item>

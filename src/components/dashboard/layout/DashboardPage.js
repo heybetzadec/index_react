@@ -37,7 +37,9 @@ const DashboardPage = (props) => {
     if (!appState.loggedIn) {
         history.push('login');
 
-
+        return (
+            <></>
+        )
         // const { height, width } = UseWindowDimensions();
         // return (
         //         <div className="container-login100">

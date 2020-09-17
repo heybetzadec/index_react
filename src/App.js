@@ -1,4 +1,4 @@
-import React, {Suspense, lazy} from 'react';
+import React, {Suspense, lazy, useEffect} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 import { useImmerReducer } from "use-immer"
@@ -86,6 +86,9 @@ function App() {
 
     const [state, dispatch] = useImmerReducer(ourReducer, initialState)
 
+    useEffect(() => {
+        console.log(state.user)
+    }, [state.user])
 
     return (
         <StateContext.Provider value={state}>

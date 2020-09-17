@@ -12,9 +12,10 @@
   "edit_slider": "Edit slider",
   "roles": "Roles",
   "settings": "Settings",
-  "username": "Username",
+  "mail": "Mail",
   "password": "Password",
-  "input_username": "Please input your username!",
+  "input_email": "Please input your email!",
   "input_password": "Please input your password!",
-  "remember_me": "Remember me"
+  "remember_me": "Remember me",
+  "not_match": "Mail or password password does not match."
 }
