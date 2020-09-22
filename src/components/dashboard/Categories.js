@@ -1,6 +1,6 @@
 import React from 'react';
 import {Table, Tag, Space, PageHeader, Button} from 'antd';
-import DashboardPage from "../layout/DashboardPage";
+import DashboardPage from "./layout/DashboardPage";
 import {Link} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 

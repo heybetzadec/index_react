@@ -6,14 +6,11 @@ export default class LoginService {
     getLoginAuthentication(requestBody){
         let axiosConfig = {
             headers: {
-                'Content-Type': "application/x-www-form-urlencoded",
+                'Content-Type': "application/application/json",
             }
         };
-        let postData = {
-            email: "cavad@gmail.com",
-            password: "password"
-        };
-        return axios.post('http://127.0.0.1:8000/api/v1/user/login', qs.stringify(requestBody), axiosConfig).then(res => res.data);
+        console.log(qs.stringify(requestBody))
+        return axios.post('http://127.0.0.1:8000/api/v1/user/login', requestBody, axiosConfig).then(res => res.data);
     }
 
 }  

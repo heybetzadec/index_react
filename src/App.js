@@ -1,5 +1,5 @@
 import React, {Suspense, lazy, useEffect} from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
 
 import { useImmerReducer } from "use-immer"
 import i18n from "i18next";
@@ -17,19 +17,19 @@ import LoadingPage from "./components/publicside/layout/LoadingPage";
 
 const HomePage = lazy(() => import('./components/publicside/layout/HomePage'));
 
-const Dashboard = lazy(() => import( './components/dashboard/main/Dashboard'));
-const Login = lazy(() => import( './components/dashboard/login/Login'));
-const Categories = lazy(() => import('./components/dashboard/category/Categories'));
-const CategoryDetail = lazy(() => import('./components/dashboard/category/CategoryDetail'));
-const Posts = lazy(() => import( './components/dashboard/post/Posts'));
-const PostDetail = lazy(() => import( './components/dashboard/post/PostDetail'));
-const Slider = lazy(() => import( './components/dashboard/slider/Slider'));
-const SliderDetail = lazy(() => import( './components/dashboard/slider/SliderDetail'));
-const Users = lazy(() => import( './components/dashboard/user/Users'));
-const UserDetails = lazy(() => import( './components/dashboard/user/UserDetails'));
-const Roles = lazy(() => import( './components/dashboard/role/Roles'));
-const RoleDetail = lazy(() => import( './components/dashboard/role/RoleDetail'));
-const Setting = lazy(() => import( './components/dashboard/setting/Setting'));
+const Dashboard = lazy(() => import( './components/dashboard/Dashboard'));
+const Login = lazy(() => import( './components/dashboard/Login'));
+const Categories = lazy(() => import('./components/dashboard/Categories'));
+const CategoryDetail = lazy(() => import('./components/dashboard/CategoryDetail'));
+const Posts = lazy(() => import( './components/dashboard/Posts'));
+const PostDetail = lazy(() => import( './components/dashboard/PostDetail'));
+const Slider = lazy(() => import( './components/dashboard/Slider'));
+const SliderDetail = lazy(() => import( './components/dashboard/SliderDetail'));
+const Users = lazy(() => import( './components/dashboard/Users'));
+const UserDetails = lazy(() => import( './components/dashboard/UserDetails'));
+const Roles = lazy(() => import( './components/dashboard/Roles'));
+const RoleDetail = lazy(() => import( './components/dashboard/RoleDetail'));
+const Setting = lazy(() => import( './components/dashboard/Setting'));
 const DashboardLoading = lazy(() => import( './components/dashboard/layout/DashboardLoading'));
 
 
@@ -60,11 +60,12 @@ function App() {
     const initialState = {
         theme: 'light',
         user: {
-            token: localStorage.getItem("complexappToken"),
-            username: localStorage.getItem("complexappUsername"),
-            avatar: localStorage.getItem("complexappAvatar")
+            token: localStorage.getItem("appToken"),
+            email: localStorage.getItem("appUserMail"),
+            name: localStorage.getItem("appUserName"),
+            logo: localStorage.getItem("appUserLogo")
         },
-        loggedIn: Boolean(localStorage.getItem("complexappToken")),
+        loggedIn: Boolean(localStorage.getItem("appLoggedIn")),
     }
 
     function ourReducer(draft, action) {
@@ -72,9 +73,16 @@ function App() {
             case "login":
                 draft.loggedIn = true
                 draft.user = action.data
+                window.history.back();
                 return
             case "logout":
                 draft.loggedIn = false
+                draft.user = {
+                    token: '',
+                    email: '',
+                    name: '',
+                    logo: ''
+                }
                 return
             case "changeTheme":
                 draft.theme = draft.theme === 'light' ? 'dark' : 'light'
@@ -87,8 +95,23 @@ function App() {
     const [state, dispatch] = useImmerReducer(ourReducer, initialState)
 
     useEffect(() => {
-        console.log(state.user)
-    }, [state.user])
+        if (state.loggedIn) {
+            localStorage.setItem("appToken", state.user.token)
+            localStorage.setItem("appUserMail", state.user.email)
+            localStorage.setItem("appUserName", state.user.name)
+            localStorage.setItem("appUserLogo", state.user.logo)
+            localStorage.setItem("appLoggedIn", state.loggedIn.toString())
+        } else {
+            localStorage.removeItem("appToken")
+            localStorage.removeItem("appUserMail")
+            localStorage.removeItem("appUserName")
+            localStorage.removeItem("appUserLogo")
+            localStorage.removeItem("appLoggedIn")
+            // return  <Redirect to={global.final.dashboardPath}  />
+        }
+    }, [state.loggedIn, state.user.email, state.user.name, state.user.logo, state.user.token])
+
+
 
     return (
         <StateContext.Provider value={state}>

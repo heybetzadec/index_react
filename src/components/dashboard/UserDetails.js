@@ -1,12 +1,12 @@
 import React from 'react';
-import DashboardPage from "../layout/DashboardPage";
+import DashboardPage from "./layout/DashboardPage";
 
-const SliderDetail = (props) => {
+const UserDetails = props => {
     return (
         <DashboardPage title={props.title} menuKey={props.menuKey}>
-            SliderDetail
+            UserDetails
         </DashboardPage>
     )
 };
 
-export default SliderDetail;
+export default UserDetails;

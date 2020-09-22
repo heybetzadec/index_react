@@ -1,8 +1,8 @@
 import React from 'react';
-import '../../../util/config/variable'
-import '../../../App.css'
+import '../../util/config/variable'
+import '../../App.css'
 
-import DashboardPage from "../layout/DashboardPage";
+import DashboardPage from "./layout/DashboardPage";
 
 
 

@@ -1,7 +1,6 @@
-import React, {useState} from 'react';
-import DashboardPage from "../layout/DashboardPage";
+import React from 'react';
+import DashboardPage from "./layout/DashboardPage";
 import {Button, Card, Input, PageHeader, Form, Select, Space} from "antd";
-import {Link} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 
 const { Option } = Select;
@@ -17,11 +16,11 @@ const tailLayout = {
 
 const CategoryDetail = props => {
     const {t} = useTranslation();
-    const [size, setSize] = useState('small');
 
     const [form] = Form.useForm();
 
     const onGenderChange = value => {
+        // eslint-disable-next-line default-case
         switch (value) {
             case "male":
                 form.setFieldsValue({ note: "Hi, man!" });
@@ -41,7 +40,6 @@ const CategoryDetail = props => {
     };
 
 
-    // https://ant.design/components/form/#header
     return (
         <DashboardPage title={props.title} menuKey={props.menuKey}>
             <PageHeader

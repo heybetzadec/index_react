@@ -1,12 +1,12 @@
 import React from 'react';
-import DashboardPage from "../layout/DashboardPage";
+import DashboardPage from "./layout/DashboardPage";
 
-const RoleDetail = props => {
+const PostDetail = props => {
     return (
         <DashboardPage title={props.title} menuKey={props.menuKey}>
-            Role Detail
+            PostDetail
         </DashboardPage>
     )
 };
 
-export default RoleDetail;
+export default PostDetail;

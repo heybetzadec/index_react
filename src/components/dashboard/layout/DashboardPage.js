@@ -2,11 +2,11 @@ import React, {useContext, useEffect, useState} from 'react';
 import { useHistory } from 'react-router-dom';
 import '../../../util/config/variable'
 import '../../../App.css'
-import {Avatar, Dropdown, Layout, Menu, Space} from 'antd';
+import {Avatar, Button, Dropdown, Layout, Menu, Space} from 'antd';
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
-    SearchOutlined,
+    SearchOutlined
 } from '@ant-design/icons';
 import LeftMenu from "./LeftMenu";
 import PageBreadcrumb from "./PageBreadcrumb";
@@ -36,19 +36,11 @@ const DashboardPage = (props) => {
 
     if (!appState.loggedIn) {
         history.push('login');
+        return (<></>)
+    }
 
-        return (
-            <></>
-        )
-        // const { height, width } = UseWindowDimensions();
-        // return (
-        //         <div className="container-login100">
-        //             <div className="wrap-login100">
-        //                 <h1 style={{textAlign:"center", paddingBottom:20}}>Login</h1>
-        //                 <Login/>
-        //             </div>
-        //         </div>
-        // )
+    const logOut = () => {
+        appDispatch({ type: "logout" })
     }
 
     const menu = (
@@ -65,9 +57,9 @@ const DashboardPage = (props) => {
             </Menu.Item>
             <Menu.Divider />
             <Menu.Item>
-                <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
+                <Button type="link" size="small" onClick={logOut()}>
                     Logout
-                </a>
+                </Button>
             </Menu.Item>
         </Menu>
     );

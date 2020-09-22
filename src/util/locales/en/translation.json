@@ -17,5 +17,6 @@
   "input_email": "Please input your email!",
   "input_password": "Please input your password!",
   "remember_me": "Remember me",
-  "not_match": "Mail or password password does not match."
+  "not_match": "Mail or password password does not match.",
+  "server_not_working": "There was a problem connecting to the server."
 }

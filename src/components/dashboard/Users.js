@@ -1,5 +1,5 @@
 import React from 'react';
-import DashboardPage from "../layout/DashboardPage";
+import DashboardPage from "./layout/DashboardPage";
 
 const Users = props => {
     return (

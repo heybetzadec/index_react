@@ -1,10 +1,11 @@
-import React, {useContext, useState} from 'react';
-import StateContext from "../../../util/context/StateContext";
-import DispatchContext from "../../../util/context/DispatchContext";
-import {Alert, Button, Checkbox, Col, Form, Input, Row} from "antd";
+import React, {useContext, useEffect, useState} from 'react';
+import StateContext from "../../util/context/StateContext";
+import DispatchContext from "../../util/context/DispatchContext";
+import {Alert, Button, Checkbox, Form, Input} from "antd";
 import {useTranslation} from "react-i18next";
-import LoginService from "../../../service/LoginService";
-import './../../../service/LoginService'
+import LoginService from "../../service/LoginService";
+import '../../service/LoginService'
+import {useHistory} from "react-router-dom";
 
 const layout = {
     labelCol: { span: 7 },
@@ -17,52 +18,58 @@ const tailLayout = {
 const Login = props => {
     const appState = useContext(StateContext)
     const appDispatch = useContext(DispatchContext)
-    const [warning, setWarning] = useState(false)
+    const [warning, setWarning] = useState(<></>)
     const {t} = useTranslation();
+    const history = useHistory();
+
+
+    useEffect(() => {
+        document.title = `${t('login')} | ${global.final.appName}`
+    }, [props.title, t])
+
+
 
     const onFinish = values => {
         const service  = new LoginService()
         service.getLoginAuthentication(values).then(data => {
-            console.log(data)
             if (data.status === 'ok'){
                 appDispatch({ type: "login", data: data })
             } else {
-                setWarning(prevState => prevState=true)
+                setWarning(getWarning(t('not_match')))
             }
+        }).catch(e => {
+            setWarning(getWarning(t('server_not_working')))
         });
     };
 
-    const onFinishFailed = errorInfo => {
-        console.log('Failed:', errorInfo);
-    };
 
-    const getWarning = ()=>{
+    const getWarning = (warning)=>{
         return (
             <Alert
                 style={{marginBottom:20}}
-                message={t('not_match')}
+                message={warning}
                 type="warning"
                 closable
+                onClose={onClose}
             />
         )
     }
 
-    const onClose = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        console.log(e, 'I was closed.');
+    const onClose = (e) => {
+        setWarning(<></>)
     };
 
     return (
         <div className="container-login100">
             <div className="wrap-login100">
                 <h1 style={{textAlign:"center", paddingBottom:10}}>Login</h1>
-                {warning ? getWarning() : <></>}
+                {warning}
                 <Form
                     {...layout}
                     className="login-form"
                     name="basic"
                     initialValues={{ remember: true }}
                     onFinish={onFinish}
-                    onFinishFailed={onFinishFailed}
                 >
 
                     <Form.Item
